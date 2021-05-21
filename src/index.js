@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 const NoteApp = () => {
-  const [notes, setNotes] = useState([]);
+  const notesData = JSON.parse(localStorage.getItem('notes'));
+  const [notes, setNotes] = useState(notesData || []);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  });
 
   const addNote = (e) => {
     e.preventDefault();
@@ -44,24 +49,29 @@ const NoteApp = () => {
   );
 };
 
-// const App = (props) => {
-//   const [count, setCount] = useState(props.count);
-//   const [text, setText] = useState('');
+const App = (props) => {
+  const [count, setCount] = useState(props.count);
+  const [text, setText] = useState('');
 
-//   return (
-//     <div>
-//       <p>The current {text || 'count'} is {count}</p>
-//       <button onClick={() => setCount(count + 1)}>+1</button>
-//       <button onClick={() => setCount(count - 1)}>-1</button>
-//       <button onClick={() => setCount(props.count)}>Reset</button>
-//       <input value={text} onChange={(e) => setText(e.target.value)} />
-//     </div>
-//   )
-// };
+  useEffect(() => {
+    console.log('useEffect Ran');
+    document.title = count;
+  });
 
-// App.defaultProps = {
-//   count: 0
-// }
+  return (
+    <div>
+      <p>The current {text || 'count'} is {count}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+      <button onClick={() => setCount(count - 1)}>-1</button>
+      <button onClick={() => setCount(props.count)}>Reset</button>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
+    </div>
+  )
+};
+
+App.defaultProps = {
+  count: 0
+}
 
 ReactDOM.render(
   <React.StrictMode>

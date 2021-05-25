@@ -41,11 +41,7 @@ const NoteApp = () => {
     <div>
       <h1>Notes</h1>
       {notes.map((note) => (
-        <div key={note.title}>
-          <h3>{note.title}</h3>
-          <p>{note.body}</p>
-          <button onClick={() => removeNote(note.title)}>x</button>
-        </div>
+        <Note key={note.title} note={note} removeNote={removeNote} />
       ))}
       <p>Add Note</p>
       <form onSubmit={addNote}>
@@ -57,6 +53,15 @@ const NoteApp = () => {
   );
 };
 
+const Note = ({ note, removeNote }) => {
+  return (
+    <div>
+      <h3>{note.title}</h3>
+      <p>{note.body}</p>
+      <button onClick={() => removeNote(note.title)}>x</button>
+    </div>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>

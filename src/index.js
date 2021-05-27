@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 import notesReducer from './reducers/notes';
+import Note from './components/Note';
 
 const NoteApp = () => {
   const [notes, dispatch] = useReducer(notesReducer, []);
@@ -53,24 +54,6 @@ const NoteApp = () => {
         <textarea value={body} onChange={(e) => setBody(e.target.value)} />
         <button>add note</button>
       </form>
-    </div>
-  );
-};
-
-const Note = ({ note, removeNote }) => {
-  useEffect(() => {
-    console.log('note effect');
-
-    return () => {
-      console.log('cleaning up effect');
-    };
-  }, []);
-
-  return (
-    <div>
-      <h3>{note.title}</h3>
-      <p>{note.body}</p>
-      <button onClick={() => removeNote(note.title)}>x</button>
     </div>
   );
 };

@@ -24,7 +24,7 @@ const NoteApp = () => {
       type: 'REMOVE_NOTE',
       title
     });
-  }
+  };
 
   return (
     <div>
@@ -35,4 +35,4 @@ const NoteApp = () => {
   );
 };
 
-export { NoteApp as default }
+export { NoteApp as default };
